@@ -12,7 +12,7 @@ const Navbar = () => {
     setSnackbarOpen(true);
     setTimeout(() => {
       navigate("/login");
-    }, 1500); // Redirect after showing the Snackbar
+    }, 1000); 
   };
 
   return (
@@ -38,7 +38,6 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Snackbar for Logout Notification */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={1500}
