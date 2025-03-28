@@ -1,16 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <nav className="bg-blue-950 py-4 shadow-md">
-      <div className="container mx-auto p-4">
-        <Link to="/" className="text-white text-2xl font-semibold italic">
+    <AppBar position="static" sx={{ backgroundColor: "#172554",padding: "10px 15px" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography
+          variant="h6"
+          component={Link}
+          to="/"
+          sx={{ color: "white", textDecoration: "none", fontStyle: "italic" }}
+        >
           EmployWise
-        </Link>
-      </div>
-      <hr className="border-t-2 border-white mt-2" />
-    </nav>
+        </Typography>
+
+        {token && (
+          <Box>
+            <Button variant="outlined" color="inherit" onClick={handleLogout} >
+              Logout
+            </Button>
+          </Box>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 
